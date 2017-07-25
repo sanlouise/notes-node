@@ -1,20 +1,27 @@
 const _ = require('lodash');
+const notes = require('./notes')
 const fs = require('fs');
-let command = process.argv[2]; //list
+const yargs = require('yargs');
+const argv = yargs.argv;
+let command = process.argv[2];
 
 switch (command) {
   case "add":
-  console.log('adding a note');
+  notes.addNote(argv.title, argv.body)
   break;
 
   case "list":
-  console.log('listing all notes');
+  notes.getAll()
   break;
 
   case "read":
-  console.log('reading a note');
+  notes.readNote(argv.title, argv.body)
+  break;
+
+  case "remove":
+  notes.removeNote(argv.title, argv.body)
   break;
 
   default:
-  console.log('command not found');
+  console.log("command not found");
 }
