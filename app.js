@@ -2,12 +2,19 @@ const _ = require('lodash');
 const fs = require('fs');
 let command = process.argv[2]; //list
 
-console.log(process.argv);
+switch (command) {
+  case "add":
+  console.log('adding a note');
+  break;
 
-if (command === 'add') {
-  console.log('adding a note')
-} if (command === 'list') {
+  case "list":
   console.log('listing all notes');
-} else {
+  break;
+
+  case "read":
+  console.log('reading a note');
+  break;
+
+  default:
   console.log('command not found');
 }
