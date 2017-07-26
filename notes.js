@@ -19,4 +19,6 @@ const removeNote = () => {
 module.exports = {
   addNote,
   getAll,
+  readNote,
+  removeNote,
 };
