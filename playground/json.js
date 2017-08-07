@@ -1,11 +1,3 @@
-let obj = {
-  name: "Sandra"
-};
-
-let stringObj = JSON.stringify(obj);
-let personString = '{"name": "Sandra", "age" : 25}';
-let person = JSON.parse(personString);
-
 const fs = require('fs');
 
 let originalNote = {

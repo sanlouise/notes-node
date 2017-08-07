@@ -7,7 +7,12 @@ let command = process.argv[2];
 
 switch (command) {
   case "add":
-  notes.addNote(argv.title, argv.body)
+  let note = notes.addNote(argv.title, argv.body)
+  if (note) {
+    console.log(note)
+  } else {
+    console.log("Oops, duplicate title!")
+  }
   break;
 
   case "list":

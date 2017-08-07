@@ -1,46 +1,53 @@
 console.log('Starting notes.js');
 const fs = require('fs');
 
-const addNote = (title, body) => {
+const fetchNotes = () => {
+  try {
+    const notesString = fs.readFileSync('notes-data.json');
+    return JSON.parse(notesString);
+  } catch (e) {
+    return [];
+  }
+};
 
-  let notes = [];
-  let note = {
+const saveNotes = (notes) => {
+  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+};
+
+const addNote = (title, body) => {
+  const notes = fetchNotes();
+  const note = {
     title,
     body,
   };
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
-  //Check if there are notes with invalid properties
-  try {
-    //Fetch existing notes
-    const existingNotesString = fs.readFileSync('notes-data.json');
-    notes = JSON.parse(existingNotesString);
-  } catch(e) {
-
+  if (duplicateNotes.length === 0) {
+    notes.push(note);
+    saveNotes(notes);
+    return note;
   }
-
-
-  //Push new note
-  notes.push(note);
-  fs.writeFileSync('notes-data.json', JSON.stringify(notes));
-
 };
 
 const getAll = () => {
   console.log('Getting all notes');
+};
 
-}
+const getNote = (title) => {
+  console.log('Getting note', title);
+};
 
-const readNote = () => {
-  console.log('Reading note');
-}
+const removeNote = (title) => {
+  console.log('Removing note', title);
 
-const removeNote = () => {
-  console.log('Removing note');
-}
+  let notes = fetchNotes();
+  notes = notes.filter((note) => note.title !== title);
+  saveNotes(notes);
+};
 
 module.exports = {
   addNote,
   getAll,
-  readNote,
-  removeNote,
+  getNote,
+  removeNote
 };
