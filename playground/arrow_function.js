@@ -23,8 +23,10 @@ const user = {
 user.sayHi();
 
 //This is working as we want!
+//We can't find arguments
 const user2 = {
   name: 'Sandra',
+  console.log(arguments);
   sayHi () {
     console.log(`Hi ${this.name}`);
   }
