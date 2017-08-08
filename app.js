@@ -29,7 +29,9 @@ switch (command) {
   }
 
   case "list": {
-    notes.getAll()
+    let allNotes = notes.getAll();
+    console.log(`Printing {$allNotes.length} notes`);
+    allNotes.forEach((note) => notes.logNote(note));
     break;
   }
   case "remove": {
