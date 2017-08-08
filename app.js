@@ -2,11 +2,28 @@ const _ = require('lodash');
 const notes = require('./notes')
 const fs = require('fs');
 const yargs = require('yargs');
-const argv = yargs.argv;
-let command = process.argv[2];
+
+const argv = yargs
+  //Demand makes it required, alias allows you to type shortcut
+  .command('add', "Add a new note", {
+    title: {
+      describe: "title of note",
+      demand: true,
+      alias: 't'
+    },
+    body: {
+      describe: "body of note",
+      demand: true,
+      alias: 'b'
+    }
+  })
+  .help()
+  .argv;
+
+
+let command = argv._[0];
 
 switch (command) {
-
   case "add": {
     let note = notes.addNote(argv.title, argv.body)
     if (note) {
@@ -30,7 +47,7 @@ switch (command) {
 
   case "list": {
     let allNotes = notes.getAll();
-    console.log(`Printing {$allNotes.length} notes`);
+    console.log(`Printing ${allNotes.length} notes`);
     allNotes.forEach((note) => notes.logNote(note));
     break;
   }
