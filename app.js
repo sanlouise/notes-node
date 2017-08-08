@@ -3,21 +3,23 @@ const notes = require('./notes')
 const fs = require('fs');
 const yargs = require('yargs');
 
+//Demand makes it required, alias allows you to type shortcut
 const titleOptions = {
   describe: "Title of note",
   demand: true,
   alias: 't'
 }
 
+const bodyOptions = {
+  describe: "body of note",
+  demand: true,
+  alias: 'b'
+}
+
 const argv = yargs
-  //Demand makes it required, alias allows you to type shortcut
   .command('add', "Add a new note", {
     title: titleOptions,
-    body: {
-      describe: "body of note",
-      demand: true,
-      alias: 'b'
-    }
+    body: bodyOptions
   })
   .command('list', "List all notes")
   .command('read, Read a note', {
@@ -28,7 +30,6 @@ const argv = yargs
   })
   .help()
   .argv;
-
 
 let command = argv._[0];
 
