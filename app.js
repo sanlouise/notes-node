@@ -20,11 +20,18 @@ switch (command) {
   break;
 
   case "read":
-  notes.readNote(argv.title, argv.body)
+  let readNote = notes.getNote(argv.title);
+  if (readNote) {
+    console.log(readNote)
+  } else {
+    console.log("Oops, could not find that note!")
+  }
   break;
 
   case "remove":
-  notes.removeNote(argv.title, argv.body)
+  const removedNote = notes.removeNote(argv.title, argv.body);
+  const message = removedNote ? "The note was removed" : "The note was not removed";
+  console.log(message);
   break;
 
   default:
