@@ -3,19 +3,28 @@ const notes = require('./notes')
 const fs = require('fs');
 const yargs = require('yargs');
 
+const titleOptions = {
+  describe: "Title of note",
+  demand: true,
+  alias: 't'
+}
+
 const argv = yargs
   //Demand makes it required, alias allows you to type shortcut
   .command('add', "Add a new note", {
-    title: {
-      describe: "title of note",
-      demand: true,
-      alias: 't'
-    },
+    title: titleOptions,
     body: {
       describe: "body of note",
       demand: true,
       alias: 'b'
     }
+  })
+  .command('list', "List all notes")
+  .command('read, Read a note', {
+    title: titleOptions
+  })
+  .command('remove, Remove a note', {
+    title: titleOptions
   })
   .help()
   .argv;
